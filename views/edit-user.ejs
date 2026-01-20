@@ -1,0 +1,207 @@
+<!-- <h1>Edit User</h1>
+
+<form action="/users/<%= user._id %>/edit" method="post">
+    <input type="text" name="username" value="<%= user.username %>" required />
+    
+    <input type="email" name="email" value="<%= user.email %>" required />
+    
+    <select name="role">
+        <option value="user" <%=user.role==="user" ? "selected" : "" %>>
+            User
+        </option>
+        <option value="admin" <%=user.role==="admin" ? "selected" : "" %>>
+            Admin
+        </option>
+    </select>
+
+    <input type="text" name="contact" value="<%= user.contact %>" />
+    <input type="text" name="address" value="<%= user.address %>" />
+
+    <button type="submit">Update</button>
+</form> -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit User</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .alert {
+            padding: 12px 16px;
+            margin: 15px 0;
+            border-radius: 5px;
+            font-weight: 500;
+        }
+
+        .alert-error {
+            background-color: #ffe5e5;
+            color: #b00020;
+            border: 1px solid #ffb3b3;
+        }
+
+        .alert-success {
+            background-color: #e6fffa;
+            color: #065f46;
+            border: 1px solid #99f6e4;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-900 min-h-screen text-white">
+
+
+    <% if (error) { %>
+        <div class="alert alert-error">
+            <%= error %>
+        </div>
+        <% } %>
+
+            <% if (success) { %>
+                <div class="alert alert-success">
+                    <%= success %>
+                </div>
+                <% } %>
+
+                    <form action="/users/<%= user._id %>/edit" method="post">
+
+                        <div class="max-w-4xl mx-auto p-8">
+
+                            <div class="border-b border-white/10 pb-12">
+
+                                <!-- YOUR EXISTING FORM CONTENT (UNCHANGED) -->
+                                <!-- Everything you pasted is CORRECT Tailwind -->
+
+                                <div class="border-b border-white/10 pb-12">
+
+
+                                    <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                                        <div class="sm:col-span-3">
+                                            <label for="first-name"
+                                                class="block text-sm/6 font-medium text-white">Username</label>
+                                            <div class="mt-2">
+                                                <input id="first-name" type="text" name="username"
+                                                    autocomplete="given-name" value="<%= user.email %>"
+                                                    class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6" />
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="sm:col-span-4">
+                                            <label for="email" class="block text-sm/6 font-medium text-white">Email
+                                                address</label>
+                                            <div class="mt-2">
+                                                <input id="email" type="email" name="email" autocomplete="email"
+                                                    value="<%= user.email %>"
+                                                    class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6" />
+                                            </div>
+                                        </div>
+
+                                        <div class="sm:col-span-3">
+                                            <label for="role"
+                                                class="block text-sm/6 font-medium text-white">Role</label>
+                                            <div class="mt-2 grid grid-cols-1">
+                                                <select id="country" name="role" autocomplete="country-name"
+                                                    class="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white/5 py-1.5 pr-8 pl-3 text-base text-white outline-1 -outline-offset-1 outline-white/10 *:bg-gray-800 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6">
+                                                    <option value="user" <%=user.role==="user" ? "selected" : "" %>>
+                                                        User
+                                                    </option>
+                                                    <option value="admin" <%=user.role==="admin" ? "selected" : "" %>>
+                                                        Admin
+                                                    </option>
+
+                                                </select>
+                                                <svg viewBox="0 0 16 16" fill="currentColor" data-slot="icon"
+                                                    aria-hidden="true"
+                                                    class="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-400 sm:size-4">
+                                                    <path
+                                                        d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z"
+                                                        clip-rule="evenodd" fill-rule="evenodd" />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="col-span-full">
+                                            <label for="street-address" class="block text-sm/6 font-medium text-white">
+                                                Contact</label>
+                                            <div class="mt-2">
+                                                <input id="street-address" type="text" name="contact"
+                                                    autocomplete="street-address" value="<%= user.contact %>"
+                                                    class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6" />
+                                            </div>
+                                        </div>
+                                        <div class="col-span-full">
+                                            <label for="street-address" class="block text-sm/6 font-medium text-white">
+                                                Address</label>
+                                            <div class="mt-2">
+                                                <input id="street-address" type="text" name="address"
+                                                    autocomplete="street-address" value="<%= user.address %>"
+                                                    class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6" />
+                                            </div>
+                                        </div>
+
+
+
+
+                                        <button type="submit"
+                                            class="text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:ring-green-400 shadow-sm font-medium rounded-full text-sm px-4 py-2.5 focus:outline-none">
+                                            Submit
+                                        </button>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+
+                    </form>
+                    <div class="mt-8">
+                        <a href="/admin" class="text-indigo-400 hover:text-indigo-300">
+                            ← Back to Admin
+                        </a>
+                    </div>
+
+
+                    <script>
+                        setTimeout(() => {
+                            const alert = document.querySelector(".alert");
+                            if (alert) alert.style.display = "none";
+                        }, 3000);
+                    </script>
+                    <script>
+                        document.querySelector("form").addEventListener("submit", function (e) {
+                            const username = document.getElementById("username").value.trim();
+                            const email = document.getElementById("email").value.trim();
+                            const role = document.getElementById("role").value;
+                            const contact = document.getElementById("contact").value.trim();
+
+                            let error = "";
+
+                            if (username.length < 3) {
+                                error = "Username must be at least 3 characters";
+                            } else if (!email.includes("@")) {
+                                error = "Invalid email address";
+                            } else if (!["user", "admin"].includes(role)) {
+                                error = "Invalid role selected";
+                            } else if (contact && !/^[0-9]{10}$/.test(contact)) {
+                                error = "Contact must be 10 digits";
+                            }
+
+                            if (error) {
+                                e.preventDefault();
+                                alert(error); // simple alert (can convert to UI later)
+                            }
+                        });
+                    </script>
+
+</body>
+
+
+
+</html>

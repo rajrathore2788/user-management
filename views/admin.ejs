@@ -1,0 +1,146 @@
+<!-- <h1>Admin Dashboard</h1>
+
+<table border="1" cellpadding="10">
+    <tr>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Actions</th>
+    </tr>
+
+    <% users.forEach(user=> { %>
+        <tr>
+            <td>
+                <%= user.username %>
+            </td>
+            <td>
+                <%= user.email %>
+            </td>
+            <td>
+                <%= user.role %>
+            </td>
+            <td>
+                <a href="/users/<%= user._id %>">Edit</a>
+
+                <form action="/users/<%= user._id %>/delete" method="post" style="display:inline;">
+                    <button type="submit" onclick="return confirm('Delete user?')">
+                        Delete
+                    </button>
+                </form>
+            </td>
+        </tr>
+        <% }) %>
+</table>
+
+<a href="/logout">Logout</a> -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .alert {
+            padding: 12px 16px;
+            margin: 15px 0;
+            border-radius: 5px;
+            font-weight: 500;
+        }
+
+        .alert-error {
+            background-color: #ffe5e5;
+            color: #b00020;
+            border: 1px solid #ffb3b3;
+        }
+
+        .alert-success {
+            background-color: #e6fffa;
+            color: #065f46;
+            border: 1px solid #99f6e4;
+        }
+    </style>
+</head>
+
+
+<body class="bg-gray-900 min-h-screen text-white">
+
+
+    <% if (error) { %>
+        <div class="alert alert-error">
+            <%= error %>
+        </div>
+        <% } %>
+
+            <% if (success) { %>
+                <div class="alert alert-success">
+                    <%= success %>
+                </div>
+                <% } %>
+
+                    <div class="max-w-5xl mx-auto p-6">
+
+                        <ul role="list" class="divide-y divide-white/5">
+                            <% users.forEach(user=> { %>
+                                <li class="flex justify-between gap-x-6 py-5">
+                                    <div class="flex min-w-0 gap-x-4">
+                                        <img src="data:image/jpeg;base64,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"
+                                            alt=""
+                                            class="size-12 flex-none rounded-full bg-gray-800 outline -outline-offset-1 outline-white/10" />
+                                        <div class="min-w-0 flex-auto">
+                                            <p class="text-sm/6 font-semibold text-white">
+                                                <%= user.username %>
+                                            </p>
+                                            <p class="mt-1 truncate text-xs/5 text-gray-400">
+                                                <%= user.email %>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="hidden shrink-0 sm:flex sm:flex-row sm:items-center gap-3">
+
+                                        <p class="text-sm/6 text-white">
+                                            <%= user.role %>
+                                        </p>
+                                        <a href="/users/<%= user._id %>"><button
+                                                class="text-white bg-indigo-600 hover:bg-indigo-500 focus:ring-4 focus:ring-indigo-400 shadow-sm font-medium rounded-md text-sm px-4 py-2.5">
+                                                Edit
+                                            </button></a>
+                                        <form action="/users/<%= user._id %>/delete" method="post"
+                                            style="display:inline;">
+
+                                            <button type="submit"
+                                                class="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-red-400 shadow-sm font-medium rounded-md text-sm px-4 py-2.5 focus:outline-none">
+                                                Delete
+                                            </button>
+                                        </form>
+
+
+
+                                    </div>
+                                </li>
+                                <% }) %>
+
+                        </ul>
+
+                    </div>
+                    <% if (typeof error !=="undefined" ) { %>
+                        <div class="alert alert-error">
+                            <%= error %>
+                        </div>
+                        <% } %>
+
+
+                            <script>
+                                setTimeout(() => {
+                                    const alert = document.querySelector(".alert");
+                                    if (alert) alert.style.display = "none";
+                                }, 3000);
+                            </script>
+</body>
+
+
+</html>

@@ -1,0 +1,182 @@
+<!-- <!DOCTYPE html>
+<html>
+
+<head>
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="/dashboard.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="sidebar">
+            <h2>User Panel</h2>
+            <a href="#">Dashboard</a>
+            <a href="/logout">Logout</a>
+        </div>
+
+        <div class="main">
+            <div class="header">
+                <h1>Welcome, <%= user.username %>
+                </h1>
+                <button class="logout" onclick="logout()">Logout</button>
+            </div>
+
+            <div class="cards">
+                <div class="card">
+                    <h3>Email</h3>
+                    <p>
+                        <%= user.email %>
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3>Role</h3>
+                    <p>
+                        <%= user.role %>
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3>Contact</h3>
+                    <p>
+                        <%= user.contact %>
+                    </p>
+                </div>
+                <div class="card">
+                    <h3>address</h3>
+                    <p>
+                        <%= user.address %>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function logout() {
+            window.location.href = "/logout";
+        }
+    </script>
+
+</body>
+
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Dashboard</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .alert {
+            padding: 12px 16px;
+            margin: 15px 0;
+            border-radius: 5px;
+            font-weight: 500;
+        }
+
+        .alert-error {
+            background-color: #ffe5e5;
+            color: #b00020;
+            border: 1px solid #ffb3b3;
+        }
+
+        .alert-success {
+            background-color: #e6fffa;
+            color: #065f46;
+            border: 1px solid #99f6e4;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 min-h-screen">
+
+
+    <% if (error) { %>
+        <div class="alert alert-error">
+            <%= error %>
+        </div>
+        <% } %>
+
+            <% if (success) { %>
+                <div class="alert alert-success">
+                    <%= success %>
+                </div>
+                <% } %>
+
+                    <div class="max-w-4xl mx-auto p-6">
+                        <div class="bg-white overflow-hidden shadow rounded-lg border">
+                            <div class="px-4 py-5 sm:px-6">
+                                <h3 class="text-lg font-medium text-gray-900">
+                                    User Profile
+                                </h3>
+                                <p class="mt-1 text-sm text-gray-500">
+                                    This is some information about the user.
+                                </p>
+                            </div>
+
+                            <div class="border-t border-gray-200">
+                                <dl class="divide-y divide-gray-200">
+
+                                    <div class="py-4 grid grid-cols-3 gap-4 px-6">
+                                        <dt class="text-sm font-medium text-gray-500">Full name</dt>
+                                        <dd class="text-sm text-gray-900 col-span-2">
+                                            <%= user.username %>
+                                        </dd>
+                                    </div>
+
+                                    <div class="py-4 grid grid-cols-3 gap-4 px-6">
+                                        <dt class="text-sm font-medium text-gray-500">Email</dt>
+                                        <dd class="text-sm text-gray-900 col-span-2">
+                                            <%= user.email %>
+                                        </dd>
+                                    </div>
+
+                                    <div class="py-4 grid grid-cols-3 gap-4 px-6">
+                                        <dt class="text-sm font-medium text-gray-500">Role</dt>
+                                        <dd class="text-sm text-gray-900 col-span-2">
+                                            <%= user.role %>
+                                        </dd>
+                                    </div>
+
+                                    <div class="py-4 grid grid-cols-3 gap-4 px-6">
+                                        <dt class="text-sm font-medium text-gray-500">Contact</dt>
+                                        <dd class="text-sm text-gray-900 col-span-2">
+                                            <%= user.contact %>
+                                        </dd>
+                                    </div>
+                                    <div class="py-4 grid grid-cols-3 gap-4 px-6">
+                                        <dt class="text-sm font-medium text-gray-500">Address</dt>
+                                        <dd class="text-sm text-gray-900 col-span-2">
+                                            <%= user.address %>
+                                        </dd>
+                                    </div>
+
+                                </dl>
+                            </div>
+                        </div>
+                    </div>
+
+                    <% if (typeof error !=="undefined" ) { %>
+                        <div class="alert alert-error">
+                            <%= error %>
+                        </div>
+                        <% } %>
+                            <script>
+                                setTimeout(() => {
+                                    const alert = document.querySelector(".alert");
+                                    if (alert) alert.style.display = "none";
+                                }, 3000);
+                            </script>
+</body>
+
+
+
+</html>
