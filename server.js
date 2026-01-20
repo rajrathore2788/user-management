@@ -30,7 +30,7 @@ async function startServer() {
         console.log(`🚀 Server running on port ${PORT}`);
 
         // open browser only in dev
-        if (process.env.NODE_ENV !== "test") {
+        if (process.env.NODE_ENV === "development" && require.main === module) {
           const { default: open } = await import("open");
           await open("http://localhost:5000/login");
         }
